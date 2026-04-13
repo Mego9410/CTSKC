@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, Oswald } from "next/font/google";
 import "./globals.css";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
+import { AnnouncementBar } from "@/components/site/AnnouncementBar";
+import { BookTrialProvider } from "@/components/site/BookTrialProvider";
+import { Footer } from "@/components/site/Footer";
+import { Navbar } from "@/components/site/Navbar";
+import { StickyMobileCtaBar } from "@/components/site/StickyMobileCtaBar";
 
 const body = IBM_Plex_Sans({
   variable: "--font-body",
@@ -48,7 +53,14 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <LocalBusinessJsonLd />
-        {children}
+        <BookTrialProvider>
+          <AnnouncementBar />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <StickyMobileCtaBar />
+          <div className="h-[4.75rem] md:hidden" aria-hidden="true" />
+        </BookTrialProvider>
       </body>
     </html>
   );
