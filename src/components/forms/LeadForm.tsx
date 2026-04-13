@@ -21,11 +21,11 @@ function Field({
   error?: string;
 }) {
   return (
-    <label className="grid gap-2">
+    <label className="grid min-w-0 gap-2">
       <span className="text-xs tracking-[0.24em] uppercase text-[color:var(--muted)]">{label}</span>
       <input
         className={cn(
-          "h-12 rounded-2xl bg-black/20 px-4 text-sm ring-1 ring-white/10 placeholder:text-white/25",
+          "h-12 w-full min-w-0 max-w-full rounded-2xl bg-black/20 px-4 text-sm ring-1 ring-white/10 placeholder:text-white/25",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]",
         )}
         name={name}
@@ -58,7 +58,13 @@ export function LeadForm({
   const firstErr = (k: string) => (fe?.[k]?.[0] ? String(fe[k][0]) : undefined);
 
   return (
-    <form action={action} className={cn("rounded-[2rem] bg-[color:var(--surface)] ring-1 ring-white/10 p-6 sm:p-8", className)}>
+    <form
+      action={action}
+      className={cn(
+        "@container max-w-full rounded-[2rem] bg-[color:var(--surface)] p-6 ring-1 ring-white/10 sm:p-8",
+        className,
+      )}
+    >
       <input type="hidden" name="kind" value={kind} />
       <div
         id={titleId}
@@ -90,18 +96,18 @@ export function LeadForm({
             </div>
           ) : null}
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-5 @min-[480px]:grid-cols-2">
             <Field label="Name" name="name" placeholder="Your name" error={firstErr("name")} />
             <Field label="Email (optional)" name="email" type="email" placeholder="you@example.com" error={firstErr("email")} />
           </div>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-5 @min-[480px]:grid-cols-2">
             <Field label="Phone (optional)" name="phone" type="tel" placeholder="Mobile or landline" error={firstErr("phone")} />
             {kind === "trial" ? (
-              <label className="grid gap-2">
+              <label className="grid min-w-0 gap-2">
                 <span className="text-xs tracking-[0.24em] uppercase text-[color:var(--muted)]">Preferred day (optional)</span>
                 <select
-                  className="h-12 rounded-2xl bg-black/20 px-4 text-sm ring-1 ring-white/10 text-[color:var(--foreground)]"
+                  className="h-12 w-full min-w-0 max-w-full rounded-2xl bg-black/20 px-4 text-sm text-[color:var(--foreground)] ring-1 ring-white/10"
                   name="preferredDay"
                   defaultValue=""
                 >
@@ -114,16 +120,14 @@ export function LeadForm({
                   <span className="text-xs text-[color:var(--accent2)]">{firstErr("preferredDay")}</span>
                 ) : null}
               </label>
-            ) : (
-              <div />
-            )}
+            ) : null}
           </div>
 
-          <label className="mt-4 grid gap-2">
+          <label className="mt-5 grid min-w-0 gap-2">
             <span className="text-xs tracking-[0.24em] uppercase text-[color:var(--muted)]">Message</span>
             <textarea
               className={cn(
-                "min-h-28 rounded-3xl bg-black/20 px-4 py-3 text-sm ring-1 ring-white/10 placeholder:text-white/25",
+                "min-h-28 w-full min-w-0 max-w-full rounded-3xl bg-black/20 px-4 py-3 text-sm ring-1 ring-white/10 placeholder:text-white/25",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--ring)]",
               )}
               name="message"

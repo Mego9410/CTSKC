@@ -66,7 +66,7 @@ export function BookTrialProvider({ children }: { children: React.ReactNode }) {
           }
         }}
       >
-        <div className="grain relative max-h-[min(90dvh,calc(100%-2rem))] overflow-y-auto overscroll-contain p-5 sm:p-6">
+        <div className="grain relative max-h-[min(90dvh,calc(100%-2rem))] min-w-0 overflow-x-hidden overflow-y-auto overscroll-contain p-5 sm:p-6">
           <div className="flex justify-end">
             <button
               type="button"
