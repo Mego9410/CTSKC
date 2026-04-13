@@ -6,9 +6,9 @@ import { fileURLToPath } from "node:url";
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: appRoot,
-  },
+  // Only needed locally when a parent folder has its own lockfile (wrong inferred root).
+  // Omit on Vercel so the build uses default resolution.
+  ...(process.env.VERCEL ? {} : { turbopack: { root: appRoot } }),
   images: {
     /** Allow `quality` on `<Image>` (hero, gallery, etc.). */
     qualities: [75, 80, 85, 90, 92, 95],
